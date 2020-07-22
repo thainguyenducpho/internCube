@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeSYSVN_Intern_anhthai", "CubeSYSVN_Intern_anhthai\CubeSYSVN_Intern_anhthai.csproj", "{B97C87F9-60F8-4F0D-8845-021E1126134A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B97C87F9-60F8-4F0D-8845-021E1126134A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B97C87F9-60F8-4F0D-8845-021E1126134A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B97C87F9-60F8-4F0D-8845-021E1126134A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B97C87F9-60F8-4F0D-8845-021E1126134A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFF270A1-6C65-47BD-84AD-24965901968D}
+	EndGlobalSection
+EndGlobal

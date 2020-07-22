@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="anhthaiModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="SVR_BUMON">
+    <Key>
+      <PropertyRef Name="BUMON_ID" />
+    </Key>
+    <Property Name="BUMON_CD" Type="varchar2" MaxLength="20" />
+    <Property Name="BUMON_NAME" Type="varchar2" MaxLength="1000" />
+    <Property Name="COMPANY_ID" Type="number" Precision="38" Scale="0" />
+    <Property Name="INSERT_DATE" Type="date" />
+    <Property Name="INSERT_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="UPDATE_DATE" Type="date" />
+    <Property Name="UPDATE_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="DEL_FLAG" Type="number" Precision="38" Scale="0" />
+    <Property Name="BUMON_ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SVR_COMPANY">
+    <Key>
+      <PropertyRef Name="COMPANY_ID" />
+    </Key>
+    <Property Name="COMPANY_CD" Type="varchar2" MaxLength="10" />
+    <Property Name="COMPANY_NAME" Type="varchar2" MaxLength="1000" />
+    <Property Name="INSERT_DATE" Type="date" />
+    <Property Name="INSERT_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="UPDATE_DATE" Type="date" />
+    <Property Name="UPDATE_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="DEL_FLAG" Type="number" Precision="38" Scale="0" />
+    <Property Name="COMPANY_ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SVR_STORE">
+    <Key>
+      <PropertyRef Name="STORE_CD" />
+    </Key>
+    <Property Name="STORE_CD" Type="varchar2" MaxLength="10" Nullable="false" />
+    <Property Name="STORE_NAME" Type="varchar2" MaxLength="1000" />
+    <Property Name="INSERT_DATE" Type="date" />
+    <Property Name="INSERT_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="UPDATE_DATE" Type="date" />
+    <Property Name="UPDATE_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="DEL_FLAG" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="SVR_USER">
+    <Key>
+      <PropertyRef Name="USERNAME" />
+    </Key>
+    <Property Name="USERNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar2" MaxLength="100" />
+    <Property Name="COMPANY_ID" Type="number" Precision="38" Scale="0" />
+    <Property Name="BUMON_ID" Type="number" Precision="38" Scale="0" />
+    <Property Name="INSERT_DATE" Type="date" />
+    <Property Name="INSERT_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="UPDATE_DATE" Type="date" />
+    <Property Name="UPDATE_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="DEL_FLAG" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="SVR_VERSION">
+    <Key>
+      <PropertyRef Name="VERSION_NO" />
+    </Key>
+    <Property Name="TYPE_SEND" Type="number" Precision="38" Scale="0" />
+    <Property Name="FROM_DATE" Type="date" />
+    <Property Name="TO_DATE" Type="date" />
+    <Property Name="INSERT_DATE" Type="date" />
+    <Property Name="INSERT_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="UPDATE_DATE" Type="date" />
+    <Property Name="UPDATE_USER" Type="varchar2" MaxLength="20" />
+    <Property Name="DEL_FLAG" Type="number" Precision="38" Scale="0" />
+    <Property Name="BUMON_ID" Type="number" Precision="38" Scale="0" />
+    <Property Name="VERSION_NO" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SVR_VIEW">
+    <Key>
+      <PropertyRef Name="LOG_ID" />
+    </Key>
+    <Property Name="IMEI" Type="varchar2" MaxLength="15" />
+    <Property Name="BUMON_ID" Type="number" Precision="38" Scale="0" />
+    <Property Name="STORE_CD" Type="varchar2" MaxLength="10" />
+    <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" />
+    <Property Name="VIEW_DATE" Type="varchar2" MaxLength="10" />
+    <Property Name="GENDER" Type="number" Precision="38" Scale="0" />
+    <Property Name="AGE" Type="number" Precision="38" Scale="0" />
+    <Property Name="VIEWS" Type="number" Precision="38" Scale="0" />
+    <Property Name="INSERT_DATE" Type="date" />
+    <Property Name="UPDATE_DATE" Type="date" />
+    <Property Name="LOG_ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="SVR_BUMON_FK1">
+    <End Role="SVR_COMPANY" Type="Self.SVR_COMPANY" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SVR_BUMON" Type="Self.SVR_BUMON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SVR_COMPANY">
+        <PropertyRef Name="COMPANY_ID" />
+      </Principal>
+      <Dependent Role="SVR_BUMON">
+        <PropertyRef Name="COMPANY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SVR_VERSION_FK1">
+    <End Role="SVR_BUMON" Type="Self.SVR_BUMON" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SVR_VERSION" Type="Self.SVR_VERSION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SVR_BUMON">
+        <PropertyRef Name="BUMON_ID" />
+      </Principal>
+      <Dependent Role="SVR_VERSION">
+        <PropertyRef Name="BUMON_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SVR_VIEW_FK1">
+    <End Role="SVR_BUMON" Type="Self.SVR_BUMON" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SVR_VIEW" Type="Self.SVR_VIEW" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SVR_BUMON">
+        <PropertyRef Name="BUMON_ID" />
+      </Principal>
+      <Dependent Role="SVR_VIEW">
+        <PropertyRef Name="BUMON_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SVR_VIEW_FK2">
+    <End Role="SVR_STORE" Type="Self.SVR_STORE" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SVR_VIEW" Type="Self.SVR_VIEW" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SVR_STORE">
+        <PropertyRef Name="STORE_CD" />
+      </Principal>
+      <Dependent Role="SVR_VIEW">
+        <PropertyRef Name="STORE_CD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="anhthaiModelStoreContainer">
+    <EntitySet Name="SVR_BUMON" EntityType="Self.SVR_BUMON" Schema="ANHTHAI" store:Type="Tables" />
+    <EntitySet Name="SVR_COMPANY" EntityType="Self.SVR_COMPANY" Schema="ANHTHAI" store:Type="Tables" />
+    <EntitySet Name="SVR_STORE" EntityType="Self.SVR_STORE" Schema="ANHTHAI" store:Type="Tables" />
+    <EntitySet Name="SVR_USER" EntityType="Self.SVR_USER" Schema="ANHTHAI" store:Type="Tables" />
+    <EntitySet Name="SVR_VERSION" EntityType="Self.SVR_VERSION" Schema="ANHTHAI" store:Type="Tables" />
+    <EntitySet Name="SVR_VIEW" EntityType="Self.SVR_VIEW" Schema="ANHTHAI" store:Type="Tables" />
+    <AssociationSet Name="SVR_BUMON_FK1" Association="Self.SVR_BUMON_FK1">
+      <End Role="SVR_COMPANY" EntitySet="SVR_COMPANY" />
+      <End Role="SVR_BUMON" EntitySet="SVR_BUMON" />
+    </AssociationSet>
+    <AssociationSet Name="SVR_VERSION_FK1" Association="Self.SVR_VERSION_FK1">
+      <End Role="SVR_BUMON" EntitySet="SVR_BUMON" />
+      <End Role="SVR_VERSION" EntitySet="SVR_VERSION" />
+    </AssociationSet>
+    <AssociationSet Name="SVR_VIEW_FK1" Association="Self.SVR_VIEW_FK1">
+      <End Role="SVR_BUMON" EntitySet="SVR_BUMON" />
+      <End Role="SVR_VIEW" EntitySet="SVR_VIEW" />
+    </AssociationSet>
+    <AssociationSet Name="SVR_VIEW_FK2" Association="Self.SVR_VIEW_FK2">
+      <End Role="SVR_STORE" EntitySet="SVR_STORE" />
+      <End Role="SVR_VIEW" EntitySet="SVR_VIEW" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

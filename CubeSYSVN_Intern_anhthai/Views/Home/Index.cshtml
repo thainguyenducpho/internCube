@@ -1,0 +1,253 @@
+﻿@model CubeSYSVN_Intern_anhthai.Models.SVR_VERSION
+
+@{
+    ViewBag.Title = "Version List";
+}
+<div class="container-fluid" style="margin-top:20px">
+    <div style="margin-bottom: 5px"> 
+        <a href="#" class="btn btn-danger" onclick="AddNewVersion(0)"> Add </a> 
+    </div>
+    <table id="VersionTable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>BUMON NAME</th>
+                <th>TYPE SEND</th>
+                <th>VERSION NO</th>
+                <th>FROM DATE</th>
+                <th>TO DATE</th>
+                <th>INSERT USER</th>
+                <th>INSERT DATE</th>
+                <th>UPDATE USER</th>
+                <th>UPDATE DATE</th>
+                <th>DEL FLAG</th>
+                <th>FUNCTION</th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+<!--Create A Popup Modal With Registration Form For Add Or Edit Student Record-->
+<!--create-->
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.VERSION_NO, new { @id = "bmId" })
+                        <div class="form-group">
+                            <label>Bumon Name</label>
+                            @Html.DropDownListFor(m => m.BUMON_ID, (IEnumerable<SelectListItem>) ViewBag.ListOfBumon , "--Select Bumon--", new { @id = "DropDwn", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FROM_DATE, new { @id = "fromdate", type = "date" })
+                        </div>
+                        <div class="form-group">
+                            <label>To Day</label>
+                            @Html.TextBoxFor(m => m.TO_DATE, new { @id = "todate", type = "date" })
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-primary" id="SaveStudentRecord">Save</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Create A PopUp Modal For DeleteConfirmation-->
+
+<div class="modal fade" id="DeleteConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4>Delete Student Record</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Are You Sure? You Want To Delete This Record.</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" onclick="ConfirmDelete()"> OK </a>
+                <a href="#" class="btn btn-primary" data-dismiss="modal" id="r">Cancle</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+    <script src="//cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script>
+        var dataTable;
+        $(document).ready(function () {
+            dataTable = $("#VersionTable").DataTable({
+                ajax: {
+                    "url": "/Home/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                columnDefs: [
+                    {
+                        targets: 3,
+                        render: function (data) {
+                            if (data == null)
+                                return null;
+                            return moment(data).format('L');
+                        }
+                    },
+                    {
+                        targets: 4,
+                        render: function (data) {
+                            if (data == null)
+                                return null;
+                            return moment(data).format('L');
+                        }
+                    },
+                    {
+                        targets: 6,
+                        render: function (data) {
+                            if (data == null)
+                                return null;
+                            return moment(data).format('L');
+                        }
+                    },
+                    {
+                        targets: 8,
+                        render: function (data) {
+                            if (data == null)
+                                return null;
+                            return moment(data).format('L');
+                        }
+                    }
+                ],
+                columns: [
+                    { data: "BUMON_NAME" },
+                    { data: "TYPE_SEND" },
+                    { data: "VERSION_NO"},
+                    { data: "FROM_DATE"},
+                    { data: "TO_DATE"},
+                    { data: "INSERT_USER" },
+                    { data: "INSERT_DATE" },
+                    { data: "UPDATE_USER"},
+                    { data: "UPDATE_DATE" },
+                    {
+                        data: "DEL_FLAG",
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                return '<input style="vertical-align: middle, text-align: center;", type="checkbox" class="editor-active">';
+                            }
+                            return data;
+                        },
+                        className: "dt-body-center"
+                    },
+                    {
+                        data: "VERSION_NO",
+                        render: function (VERSION_NO, type, full, meta) {
+                            return "<a class='btn btn-danger btn-sm' style='margin-left:5px' onclick='DeleteVersion(" + VERSION_NO + ")'><i class='fa fa-trash'></i> Delete</a> <a class='btn btn-success btn-sm' onclick= 'EditVersion("+ VERSION_NO +")'><i class='fa fa-pencil-square-o'></i> Edit</a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"150px"
+                    }
+
+                ],
+                lengthMenu: [[5, 10, 20, 30], [5, 10, 20, 30]],
+                language: {
+
+                    "emptyTable" : "No data found, Please click on <b>Add New</b> Button"
+                }
+            });
+        });
+
+        //Show The Popup Modal For Add New Student
+
+        function AddNewVersion(VERSION_NO) {
+            $("#form")[0].reset();
+            $("#bmId").val(0);
+            $("#DropDwn option:selected").text("--Select Bumon--");
+            $("#ModalTitle").html("Add Version");
+            $("#MyModal").modal();
+
+        }
+
+        //Show The Popup Modal For Edit Student Record
+
+        function EditVersion(VERSION_NO) {
+            var url = "/Home/GetVersionById?VERSION_NO=" + VERSION_NO;
+            $("#ModalTitle").html("Edit data version:");
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#bmId").val(obj.VERSION_NO);
+                    $("#DropDwn option:selected").text(obj.SVR_BUMON.BUMON_NAME);
+                    $("#DropDwn option:selected").val(obj.BUMON_ID);
+                    $("#fromdate").val(obj.FROM_DATE);
+                    $("#todate").val(obj.TO_DATE);
+                }
+            });
+        }
+        $("#SaveStudentRecord").click(function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    if (result.success) {
+                        dataTable.ajax.reload();
+                        $("#MyModal").modal("hide");
+                        $.notify(result.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                    }
+                }
+            })
+        })
+
+        //Show The Popup Modal For DeleteComfirmation
+
+        var DeleteVersion = function (VERSION_NO) {
+            $("#bmId").val(VERSION_NO);
+            $("#DeleteConfirmation").modal("show");
+        }
+        var ConfirmDelete = function Delete() {
+            var bmId = $("#bmId").val(); 
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Delete","Home")/' + bmId,
+                success: function (data) {
+                    if (data.success)
+                    {
+                        dataTable.ajax.reload();
+
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                        $("#DeleteConfirmation").modal("hide");
+
+                    }
+                }
+
+            });
+        }
+    </script>
+}

@@ -1,0 +1,86 @@
+﻿@model CubeSYSVN_Intern_anhthai.Models.SVR_USER
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Scripts/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/css/util.css">
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                @using (Html.BeginForm("Authorise", "Account", FormMethod.Post, new { @class = "login100-form validate-form p-l-55 p-r-55 p-t-178" }))
+                {
+                    <span class="login100-form-title">
+                        Account Login
+                    </span>
+
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                        @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "input100", @placeholder = "Username" } })
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div>
+                        <div></div>
+                        <div>@Html.ValidationMessageFor(model => model.USERNAME)</div>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                        @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "input100", @placeholder = "Password" } })
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div>
+                        <div></div>
+                        <div>@Html.ValidationMessageFor(model => model.PASSWORD)</div>
+                    </div>
+                    <div>
+                        <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMsg)</label>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" type="submit" value="Login">
+                            Sign in
+                        </button>
+                    </div>
+                    <div class="flex-col-c p-t-170 p-b-40">
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/Scripts/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Scripts/vendor/bootstrap/js/popper.min.js"></script>
+    <script src="~/Scripts/vendor/select2/select2.min.js"></script>
+    <script src="~/Scripts/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Scripts/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Scripts/vendor/countdowntime/countdowntime.js"></script>
+    <script src="~/Scripts/js/main.js"></script>
+</body>
+</html>

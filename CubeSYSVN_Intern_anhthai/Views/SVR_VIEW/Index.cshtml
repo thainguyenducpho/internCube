@@ -1,0 +1,141 @@
+﻿@model PagedList.IPagedList<CubeSYSVN_Intern_anhthai.Models.SVR_VIEW>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+@using (Html.BeginForm("Index", "SVR_VIEW", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> View </div>
+                <div class="panel-body">
+                    <form method="GET" id="my_form"></form>
+                    @*<table>
+                            <tr>
+                                <td>
+                                    <label>IMEI:</label>
+                                    <select>
+                                        <option value="nothing">select imei</option>
+                                        @foreach (var i in Model)
+                                        {
+                                            <option value="@i.IMEI">@i.IMEI</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>*@
+
+                    <form action="/SVR_VIEW" method="get">
+                        <p>
+                            IMEI: <input id="SearchString" name="SearchString" type="text" value="">
+                            <input id="page" name="page" type="hidden" value="">
+                            <input id="sortProperty" name="sortProperty" type="hidden" value="">
+                            <input id="sortOrder" name="sortOrder" type="hidden" value="">
+                            <input id="size" name="size" type="hidden" value="5">
+                        </p>
+
+
+                        <div class="form-group w-25 ml-3">
+                            <label>From Date</label>
+                            <input id="fromDate" type="date" name="fromDate" max="3000-12-31"
+                                   min="1000-01-01" class="form-control">
+                        </div>
+                        <div class="form-group w-25 ml-3">
+                            <label>To Date</label>
+                            <input id="toDate" type="date" name="toDate" min="1000-01-01"
+                                   max="3000-12-31" class="form-control">
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary" value="Searchss">Search</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        Kích thước trang: @Html.DropDownList("size", (List<SelectListItem>)ViewBag.size, new { @onchange = "this.form.submit();" })
+    </p>
+    <form style="float:right">
+        <p>
+            Search: <input id="SearchString" name="SearchString" type="text" value="">
+            <input id="page" name="page" type="hidden" value="">
+            <input id="sortProperty" name="sortProperty" type="hidden" value="">
+            <input id="sortOrder" name="sortOrder" type="hidden" value="">
+            <input id="size" name="size" type="hidden" value="5">
+        </p>
+    </form>
+    <table class="table">
+        <tr>
+            @Html.Raw(ViewBag.Headings)
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IMEI)
+                </td>
+                @*them doan nay*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.SVR_BUMON.BUMON_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SVR_STORE.STORE_NAME)
+                </td>
+                @*<th>none</th>*@
+                @*-------------*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIEW_DATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIEWS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.INSERT_DATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UPDATE_DATE)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <!-- Thêm mã phân trang -->
+    <br />
+    <div class="row">
+        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+            @using (Html.BeginForm("Index", "SVR_VIEW", FormMethod.Get))
+            {
+
+                @Html.Hidden("page", (object)ViewBag.page)
+                @Html.Hidden("sortProperty", (object)ViewBag.sortProperty)
+                @Html.Hidden("sortOrder", (object)ViewBag.sortOrder)
+                @Html.Hidden("searchString", (object)ViewBag.searchValue)
+            }
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+            Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </div>
+    </div>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, size = ViewBag.currentSize, sortProperty = ViewBag.sortProperty, sortOrder = ViewBag.SortOrder, searchString = ViewBag.searchValue }))
+    <!-- Kết thúc -->
+}
+<script>
+    document.getElementById('SearchString').addEventListener('keyup', function(event) {
+    if (event.code === 'Enter') {
+	  event.preventDefault();
+      document.querySelector('form').submit();
+    }
+  });
+</script>

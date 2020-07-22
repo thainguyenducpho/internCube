@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="anhthaiModelStoreContainer" CdmEntityContainer="anhthaiEntities">
+    <EntitySetMapping Name="SVR_BUMON">
+      <EntityTypeMapping TypeName="anhthaiModel.SVR_BUMON">
+        <MappingFragment StoreEntitySet="SVR_BUMON">
+          <ScalarProperty Name="BUMON_CD" ColumnName="BUMON_CD" />
+          <ScalarProperty Name="BUMON_NAME" ColumnName="BUMON_NAME" />
+          <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+          <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+          <ScalarProperty Name="INSERT_USER" ColumnName="INSERT_USER" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="UPDATE_USER" ColumnName="UPDATE_USER" />
+          <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+          <ScalarProperty Name="BUMON_ID" ColumnName="BUMON_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SVR_COMPANY">
+      <EntityTypeMapping TypeName="anhthaiModel.SVR_COMPANY">
+        <MappingFragment StoreEntitySet="SVR_COMPANY">
+          <ScalarProperty Name="COMPANY_CD" ColumnName="COMPANY_CD" />
+          <ScalarProperty Name="COMPANY_NAME" ColumnName="COMPANY_NAME" />
+          <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+          <ScalarProperty Name="INSERT_USER" ColumnName="INSERT_USER" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="UPDATE_USER" ColumnName="UPDATE_USER" />
+          <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+          <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SVR_STORE">
+      <EntityTypeMapping TypeName="anhthaiModel.SVR_STORE">
+        <MappingFragment StoreEntitySet="SVR_STORE">
+          <ScalarProperty Name="STORE_CD" ColumnName="STORE_CD" />
+          <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+          <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+          <ScalarProperty Name="INSERT_USER" ColumnName="INSERT_USER" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="UPDATE_USER" ColumnName="UPDATE_USER" />
+          <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SVR_USER">
+      <EntityTypeMapping TypeName="anhthaiModel.SVR_USER">
+        <MappingFragment StoreEntitySet="SVR_USER">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+          <ScalarProperty Name="BUMON_ID" ColumnName="BUMON_ID" />
+          <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+          <ScalarProperty Name="INSERT_USER" ColumnName="INSERT_USER" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="UPDATE_USER" ColumnName="UPDATE_USER" />
+          <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SVR_VERSION">
+      <EntityTypeMapping TypeName="anhthaiModel.SVR_VERSION">
+        <MappingFragment StoreEntitySet="SVR_VERSION">
+          <ScalarProperty Name="TYPE_SEND" ColumnName="TYPE_SEND" />
+          <ScalarProperty Name="FROM_DATE" ColumnName="FROM_DATE" />
+          <ScalarProperty Name="TO_DATE" ColumnName="TO_DATE" />
+          <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+          <ScalarProperty Name="INSERT_USER" ColumnName="INSERT_USER" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="UPDATE_USER" ColumnName="UPDATE_USER" />
+          <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+          <ScalarProperty Name="BUMON_ID" ColumnName="BUMON_ID" />
+          <ScalarProperty Name="VERSION_NO" ColumnName="VERSION_NO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SVR_VIEW">
+      <EntityTypeMapping TypeName="anhthaiModel.SVR_VIEW">
+        <MappingFragment StoreEntitySet="SVR_VIEW">
+          <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+          <ScalarProperty Name="BUMON_ID" ColumnName="BUMON_ID" />
+          <ScalarProperty Name="STORE_CD" ColumnName="STORE_CD" />
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+          <ScalarProperty Name="VIEW_DATE" ColumnName="VIEW_DATE" />
+          <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+          <ScalarProperty Name="AGE" ColumnName="AGE" />
+          <ScalarProperty Name="VIEWS" ColumnName="VIEWS" />
+          <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="LOG_ID" ColumnName="LOG_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

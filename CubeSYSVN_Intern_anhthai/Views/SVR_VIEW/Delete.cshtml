@@ -1,0 +1,105 @@
+﻿@model CubeSYSVN_Intern_anhthai.Models.SVR_VIEW
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SVR_VIEW</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IMEI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IMEI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BUMON_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BUMON_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STORE_CD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STORE_CD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VIEW_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VIEW_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GENDER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GENDER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VIEWS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VIEWS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INSERT_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INSERT_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UPDATE_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UPDATE_DATE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
