@@ -6,11 +6,13 @@ using System.Web.Mvc;
 using CubeSYSVN_Intern_anhthai.Models;
 using System.Web.Security;
 using WebMatrix.WebData;
+using System.Data.Entity;
 
 namespace CubeSYSVN_Intern_anhthai.Controllers
 {
     public class AccountController : Controller
     {
+        anhthaiEntities db = new anhthaiEntities();
         // GET: Login
         public ActionResult Index()
         {
@@ -36,29 +38,36 @@ namespace CubeSYSVN_Intern_anhthai.Controllers
 
         }
 
-        [HttpGet, Authorize]
+        [HttpGet]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        [HttpPost, Authorize, ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(ChangePasswordModel changePasswordModel)
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordModel obj)
         {
-            if (ModelState.IsValid)
+            string uid = Convert.ToString(Session["userName"]);
+            SVR_USER u = db.SVR_USER.Find(uid);
+            if (u.PASSWORD == obj.OldPassword)
             {
-                bool isPasswordChanged = WebSecurity.ChangePassword(WebSecurity.CurrentUserName, changePasswordModel.OldPassword, changePasswordModel.NewPassword);
-
-                if (isPasswordChanged)
-                {
-                    return RedirectToAction("Index", "Dashboard");
+                if(obj.NewPassword == obj.ConfirmNewPassword)
+                { 
+                    u.PASSWORD = obj.NewPassword;
+                    db.Entry(u).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["Message"] = "Your Password is Update Successfully!";
                 }
-                else
-                {
-                    ModelState.AddModelError("OldPassword", "Old Password is not correct.");
+                else {
+                    TempData["Message"] = "Your Password is Incorrect!";
                 }
             }
-            return View();
+            else
+            {
+                TempData["Message"] = "Invalid Current password!";
+
+            }
+            return RedirectToAction("Index", "SVR_VIEW", TempData["Message"]);
         }
 
         public ActionResult LogOut()

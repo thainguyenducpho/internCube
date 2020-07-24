@@ -16,7 +16,7 @@ namespace CubeSYSVN_Intern_anhthai
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Account", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

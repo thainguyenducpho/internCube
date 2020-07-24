@@ -27,7 +27,10 @@ function btnChangePasswordClick() {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-
+            $.notify(data.message, {
+                globalPosition: "top center",
+                className: "success"
+            })
             hidePopup("#changePasswordModal")
             showPopup("#messageErrorPass", "#errorModalPass", I0007)
         },
